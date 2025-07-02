@@ -1,4 +1,4 @@
-# pedal_space_v202506
+# pedal_space_v202507
 Analyze *.cif (single crystal) of acyl salicylhydrazone to identify free space for pedaling
 Download and install anaconda
 pip3 everything needed to run step1-3 in anaconda
