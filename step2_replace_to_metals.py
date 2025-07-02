@@ -8,8 +8,9 @@ output_dir = './pedaling_ghosts'
 os.makedirs(output_dir, exist_ok=True)
 
 # Thresholds
-cn_identification_threshold = 1.3  # Bond length for identifying central C-N
-cn_deletion_threshold = 1.8        # Bond length for deleting connected central molecule
+cn_identification_min = 1.20  # Minimum bond length for identifying central C-N
+cn_identification_max = 1.30  # Maximum bond length for identifying central C-N
+cn_deletion_threshold = 1.8   # Bond length for deleting connected central molecule
 
 # Function to calculate the distance between two points
 def calculate_distance(point1, point2):
@@ -28,14 +29,16 @@ def process_xyz_file(filepath):
         coords_array = np.array([coord for _, coord in atoms])
         dist_matrix = distance_matrix(coords_array, coords_array)
 
-        # Find central C-N pairs based on identification threshold
+        # Find central C-N pairs based on identification range
         cn_pairs = []
         for i, (atom1, coord1) in enumerate(atoms):
             if atom1 != 'C':
                 continue
             for j, (atom2, coord2) in enumerate(atoms):
-                if atom2 == 'N' and i != j and dist_matrix[i, j] < cn_identification_threshold:
-                    cn_pairs.append((i, j))
+                if atom2 == 'N' and i != j:
+                    d = dist_matrix[i, j]
+                    if cn_identification_min <= d <= cn_identification_max:
+                        cn_pairs.append((i, j))
 
         # Handle multiple or no C-N pairs
         if len(cn_pairs) == 0:
