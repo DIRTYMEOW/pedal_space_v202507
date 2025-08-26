@@ -10,5 +10,7 @@ Analyze *.cif (single crystal) of acyl salicylhydrazone to identify free space f
 
 
 8. "python step3_pillar_void.py" to calculate the pedaling cheese size. Multiprocessing function may heat up laptop. Larger volume takes longer.<br>
-
+9. After sorting the data, list them in *.dtm.<br>
+5-II/89.98/1, first column is name;volume;photochromicity.<br>
+10. "python step4_threshold.py" reads the listed data in *.dtm and output threshold/accuracy.
 d05223110@ntu.edu.tw for code modification or questions.<br>
